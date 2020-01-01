@@ -1,5 +1,15 @@
 <?php
-
+// You need to import Models of User and ListGateway For Example
+use App\User;
+use App\GatewayList;
+/*
+ *  Step 1 : Created 2 migration list_gateways and user_customize_gateway
+ *  Step 2 : Modify gateway.php and Dynamic Array Of gateways
+ *
+ *
+ */
+// Get Gateway list
+$gateways = GatewayList::where('active' , 1)->get();
 return [
 
     //-------------------------------
@@ -11,118 +21,51 @@ return [
     //--------------------------------
     // Zarinpal gateway
     //--------------------------------
-    'zarinpal' => [
-        'merchant-id'  => 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
-        'type'         => 'zarin-gate',             // Types: [zarin-gate || normal]
-        'callback-url' => '/',
-        'server'       => 'germany',                // Servers: [germany || iran || test]
-        'email'        => 'email@gmail.com',
-        'mobile'       => '09xxxxxxxxx',
-        'description'  => 'description',
-    ],
+    'zarinpal' => json_decode($gateways->where('key' , 'zarinpal')->first()->value),
 
     //--------------------------------
     // Mellat gateway
     //--------------------------------
-    'mellat' => [
-        'username'     => '',
-        'password'     => '',
-        'terminalId'   => 0000000,
-        'callback-url' => '/'
-    ],
+    'mellat' => json_decode($gateways->where('key' , 'mellat')->first()->value),
 
     //--------------------------------
     // Saman gateway
     //--------------------------------
-    'saman' => [
-        'merchant'     => '',
-        'password'     => '',
-        'callback-url'   => '/',
-    ],
+    'saman' => json_decode($gateways->where('key' , 'saman')->first()->value),
 
     //--------------------------------
     // PayIr gateway
     //--------------------------------
-    'payir'    => [
-        'api'          => 'xxxxxxxxxxxxxxxxxxxx',
-        'callback-url' => '/'
-    ],
+    'payir'    => json_decode($gateways->where('key' , 'payir')->first()->value),
 
     //--------------------------------
     // IranKish gateway
     //--------------------------------
-    'irankish' => [
-        'merchantId' => 'xxxxxxxxxxxxxxxxxxxx',
-        'sha1key' => 'xxxxxxxxxxxxxxxxxxxx',
-        'callback-url' => '/'
-    ],
+    'irankish' => json_decode($gateways->where('key' , 'irankish')->first()->value),
 
     //--------------------------------
     // Sadad gateway
     //--------------------------------
-    'sadad' => [
-        'merchant'      => '',
-        'transactionKey'=> '',
-        'terminalId'    => 000000000,
-        'callback-url'  => '/'
-    ],
+    'sadad' => json_decode($gateways->where('key' , 'sadad')->first()->value),
 
     //--------------------------------
     // Parsian gateway
     //--------------------------------
-    'parsian' => [
-        'pin'          => 'xxxxxxxxxxxxxxxxxxxx',
-        'callback-url' => '/'
-    ],
+    'parsian' => json_decode($gateways->where('key' , 'parsian')->first()->value),
     //--------------------------------
     // Pasargad gateway
     //--------------------------------
-    'pasargad' => [
-        'terminalId'    => 000000,
-        'merchantId'    => 000000,
-        'certificate-path'    => storage_path('gateway/pasargad/certificate.xml'),
-        'callback-url' => '/gateway/callback/pasargad'
-    ],
+    'pasargad' => json_decode($gateways->where('key' , 'pasargad')->first()->value),
 
     //--------------------------------
     // Asan Pardakht gateway
     //--------------------------------
-    'asanpardakht' => [
-        'merchantId'     => '',
-        'merchantConfigId'     => '',
-        'username' => '',
-        'password' => '',
-        'key' => '',
-        'iv' => '',
-        'callback-url'   => '/',
-    ],
+    'asanpardakht' => json_decode($gateways->where('key' , 'asanpardakht')->first()->value),
 
     //--------------------------------
     // Paypal gateway
     //--------------------------------
-    'paypal'   => [
-        // Default product name that appear on paypal payment items
-        'default_product_name' => 'My Product',
-        'default_shipment_price' => 0,
-        // set your paypal credential
-        'client_id' => 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-        'secret'    => 'xxxxxxxxxx_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-        'settings'  => [
-            'mode'                   => 'sandbox', //'sandbox' or 'live'
-            'http.ConnectionTimeOut' => 30,
-            'log.LogEnabled'         => true,
-            'log.FileName'           => storage_path() . '/logs/paypal.log',
-            /**
-             * Available option 'FINE', 'INFO', 'WARN' or 'ERROR'
-             *
-             * Logging is most verbose in the 'FINE' level and decreases as you
-             * proceed towards ERROR
-             */
-            'call_back_url'          => '/gateway/callback/paypal',
-            'log.LogLevel'           => 'FINE'
-
-        ]
-    ],
+    'paypal'   => json_decode($gateways->where('key' , 'paypal')->first()->value),
     //-------------------------------
     // Tables names
     //--------------------------------
